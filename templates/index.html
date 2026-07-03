@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>1º Aninho do Ravi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+  <div class="decor decor-1">🌿</div>
+  <div class="decor decor-2">🍃</div>
+  <div class="decor decor-3">🌾</div>
+
   <main class="page">
     <section class="card">
-
       <div class="hero">
+        <div class="sun"></div>
         <div class="animals">
-          <span>🦒</span>
-          <span class="lion">🦁</span>
-          <span>🐘</span>
+          <span class="animal small">🦒</span>
+          <span class="animal lion">🦁</span>
+          <span class="animal small">🐘</span>
         </div>
         <div class="grass">🌿 🌾 🌿 🌾 🌿</div>
       </div>
@@ -30,57 +37,56 @@
         Prepare-se para uma aventura fofa, cheia de alegria, amor e momentos especiais.
       </p>
 
-      <div class="countdown">
+      <section class="countdown-box">
         <p>Faltam</p>
-
-        <div class="time">
+        <div class="countdown">
           <div><strong id="dias">00</strong><span>dias</span></div>
           <div><strong id="horas">00</strong><span>horas</span></div>
           <div><strong id="minutos">00</strong><span>min</span></div>
           <div><strong id="segundos">00</strong><span>seg</span></div>
         </div>
-      </div>
+      </section>
 
       <section class="info">
-        <div>
+        <div class="info-item">
           <span>📅</span>
-          <p><strong>Data</strong><br>18 de agosto</p>
+          <p><strong>Data</strong>18 de agosto</p>
         </div>
 
-        <div>
+        <div class="info-item">
           <span>🕕</span>
-          <p><strong>Horário</strong><br>18h</p>
+          <p><strong>Horário</strong>18h</p>
         </div>
 
-        <div>
+        <div class="info-item">
           <span>📍</span>
-          <p><strong>Local</strong><br>Av. Gov. Flávio Ribeiro Coutinho, 121 - Lot. Parque Verde, Cabedelo - PB, 58036-800</p>
+          <p><strong>Local</strong>Av. Gov. Flávio Ribeiro Coutinho, 121 - Lot. Parque Verde, Cabedelo - PB, 58036-800</p>
         </div>
 
-        <div>
+        <div class="info-item">
           <span>🎈</span>
-          <p><strong>Complemento</strong><br>No Pula Pirula, retão do Manaíra</p>
+          <p><strong>Complemento</strong>No Pula Pirula, retão do Manaíra</p>
         </div>
       </section>
 
       <a
         class="maps"
-        href="https://www.google.com/maps/search/?api=1&query=Av.%20Gov.%20Fl%C3%A1vio%20Ribeiro%20Coutinho%2C%20121%20Cabedelo%20PB"
+        href="https://www.google.com/maps/search/?api=1&query=Av.%20Gov.%20Fl%C3%A1vio%20Ribeiro%20Coutinho%2C%20121%20-%20Lot.%20Parque%20Verde%2C%20Cabedelo%20-%20PB%2C%2058036-800"
         target="_blank"
+        rel="noopener noreferrer"
       >
         📍 Como chegar
       </a>
 
       <form id="formConfirmacao">
         <label for="nome">Confirme sua presença</label>
-        <input type="text" id="nome" placeholder="Nome do convidado" required>
+        <input type="text" id="nome" name="nome" placeholder="Nome do convidado" autocomplete="name" required>
         <button type="submit">Confirmar presença</button>
       </form>
 
       <p id="mensagem"></p>
 
       <footer>🌿 Esperamos você nessa aventura! 🌿</footer>
-
     </section>
   </main>
 

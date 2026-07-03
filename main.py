@@ -3,7 +3,12 @@ from datetime import datetime
 import json
 import os
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder="templates",
+    static_folder="public",
+    static_url_path="/static"
+)
 
 ARQUIVO_CONVIDADOS = "convidados.json"
 
@@ -21,7 +26,6 @@ def carregar_convidados():
 
 def salvar_convidado(nome):
     convidados = carregar_convidados()
-
     convidados.append({
         "nome": nome,
         "data_confirmacao": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
