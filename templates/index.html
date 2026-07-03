@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1º Aninho do Ravi | Confirmação de Presença</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+
+  <div class="background-leaves leaf-one">🌿</div>
+  <div class="background-leaves leaf-two">🍃</div>
+  <div class="background-leaves leaf-three">🌾</div>
+
+  <main class="page">
+    <section class="invite-card">
+
+      <div class="hero">
+        <div class="sun"></div>
+
+        <div class="animal-row">
+          <div class="animal animal-small">🦒</div>
+          <div class="animal animal-main">🦁</div>
+          <div class="animal animal-small">🐘</div>
+        </div>
+
+        <div class="grass-line">🌿 🌾 🌿 🌾 🌿</div>
+      </div>
+
+      <p class="badge">Safari do Ravi</p>
+
+      <h1>Você está convidado para o 1º aninho do Ravi!</h1>
+
+      <p class="intro">
+        Prepare-se para uma aventura fofa, cheia de alegria, amor e momentos especiais.
+      </p>
+
+      <div class="countdown-box">
+        <p class="countdown-title">Faltam</p>
+
+        <div class="countdown" id="countdown">
+          <div>
+            <strong id="dias">00</strong>
+            <span>dias</span>
+          </div>
+
+          <div>
+            <strong id="horas">00</strong>
+            <span>horas</span>
+          </div>
+
+          <div>
+            <strong id="minutos">00</strong>
+            <span>min</span>
+          </div>
+
+          <div>
+            <strong id="segundos">00</strong>
+            <span>seg</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="info-card">
+        <div class="info-item">
+          <span>📅</span>
+          <div>
+            <strong>Data</strong>
+            <p>18 de agosto</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span>🕕</span>
+          <div>
+            <strong>Horário</strong>
+            <p>18h</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span>📍</span>
+          <div>
+            <strong>Local</strong>
+            <p>Av. Gov. Flávio Ribeiro Coutinho, 121 - Lot. Parque Verde, Cabedelo - PB, 58036-800</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span>🎈</span>
+          <div>
+            <strong>Complemento</strong>
+            <p>No Pula Pirula, retão do Manaíra</p>
+          </div>
+        </div>
+      </section>
+
+      <a
+        class="map-button"
+        href="https://www.google.com/maps/search/?api=1&query=Av.%20Gov.%20Fl%C3%A1vio%20Ribeiro%20Coutinho%2C%20121%20-%20Lot.%20Parque%20Verde%2C%20Cabedelo%20-%20PB%2C%2058036-800"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        📍 Como chegar
+      </a>
+
+      <form id="formConfirmacao" class="form">
+        <label for="nome">Confirme sua presença</label>
+
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Nome do convidado"
+          autocomplete="name"
+          required
+        >
+
+        <button type="submit">
+          Confirmar presença
+        </button>
+      </form>
+
+      <p id="mensagem" class="mensagem"></p>
+
+      <footer>
+        <span>🌿</span>
+        Esperamos você nessa aventura!
+        <span>🌿</span>
+      </footer>
+
+    </section>
+  </main>
+
+  <script src="/public/script.js"></script>
+</body>
+</html>
