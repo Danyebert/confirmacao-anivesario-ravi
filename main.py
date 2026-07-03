@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__, template_folder="templates")
 
-ARQUIVO_CONVIDADOS = "convidados.json"
+ARQUIVO_CONVIDADOS = "/tmp/convidados.json"
 
 
 def carregar_convidados():
@@ -15,7 +15,7 @@ def carregar_convidados():
     try:
         with open(ARQUIVO_CONVIDADOS, "r", encoding="utf-8") as arquivo:
             return json.load(arquivo)
-    except json.JSONDecodeError:
+    except Exception:
         return []
 
 
@@ -38,21 +38,28 @@ def index():
 
 @app.route("/confirmar", methods=["POST"])
 def confirmar():
-    dados = request.get_json(silent=True) or {}
-    nome = dados.get("nome", "").strip()
+    try:
+        dados = request.get_json(silent=True) or {}
+        nome = dados.get("nome", "").strip()
 
-    if not nome:
+        if not nome:
+            return jsonify({
+                "sucesso": False,
+                "mensagem": "Por favor, informe o nome do convidado."
+            }), 400
+
+        salvar_convidado(nome)
+
+        return jsonify({
+            "sucesso": True,
+            "mensagem": "Presença confirmada com sucesso! Obrigado por fazer parte desse momento especial."
+        })
+
+    except Exception as erro:
         return jsonify({
             "sucesso": False,
-            "mensagem": "Por favor, informe o nome do convidado."
-        }), 400
-
-    salvar_convidado(nome)
-
-    return jsonify({
-        "sucesso": True,
-        "mensagem": "Presença confirmada com sucesso! Obrigado por fazer parte desse momento especial."
-    })
+            "mensagem": f"Erro ao confirmar presença: {str(erro)}"
+        }), 500
 
 
 if __name__ == "__main__":
