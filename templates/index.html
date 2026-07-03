@@ -3,13 +3,432 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>1º Aninho do Ravi</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #6f8e45;
+      --green-dark: #506832;
+      --cream: #fffaf0;
+      --brown: #4d3824;
+      --brown-soft: #80613e;
+      --gold: #d3b35f;
+      --gold-light: #f2d989;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Nunito", Arial, sans-serif;
+      color: var(--brown);
+      background:
+        radial-gradient(circle at top left, rgba(211, 179, 95, 0.30), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(111, 142, 69, 0.25), transparent 32%),
+        linear-gradient(180deg, #f8efd8 0%, #e8f1d5 100%);
+      overflow-x: hidden;
+    }
+
+    .decor {
+      position: fixed;
+      z-index: 0;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .decor-1 {
+      top: 30px;
+      left: -18px;
+      font-size: 90px;
+      transform: rotate(-20deg);
+    }
+
+    .decor-2 {
+      right: -12px;
+      top: 150px;
+      font-size: 82px;
+      transform: rotate(24deg);
+    }
+
+    .decor-3 {
+      bottom: 24px;
+      left: 8px;
+      font-size: 78px;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 20px 14px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(255, 245, 222, 0.98));
+      border: 2px solid rgba(211, 179, 95, 0.72);
+      border-radius: 34px;
+      padding: 20px 18px 24px;
+      text-align: center;
+      box-shadow: 0 20px 42px rgba(76, 53, 30, 0.20);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 165px;
+      height: 165px;
+      background: rgba(111, 142, 69, 0.13);
+      border-radius: 50%;
+      top: -70px;
+      left: -65px;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: rgba(211, 179, 95, 0.15);
+      border-radius: 50%;
+      bottom: -78px;
+      right: -70px;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero {
+      min-height: 178px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, #fff2c5 0%, #f0dca8 58%, #dce7ba 100%);
+      border: 1px solid rgba(211, 179, 95, 0.55);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 17px;
+    }
+
+    .sun {
+      position: absolute;
+      width: 78px;
+      height: 78px;
+      background: radial-gradient(circle, #ffe8a8, var(--gold));
+      border-radius: 50%;
+      top: 20px;
+      right: 28px;
+      box-shadow: 0 0 25px rgba(211, 179, 95, 0.48);
+    }
+
+    .animals {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .animal {
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 250, 240, 0.70);
+      border: 2px solid rgba(255, 255, 255, 0.62);
+      box-shadow: 0 10px 22px rgba(93, 66, 41, 0.15);
+      animation: flutuar 3.5s ease-in-out infinite;
+    }
+
+    .animal.small {
+      width: 70px;
+      height: 70px;
+      font-size: 42px;
+    }
+
+    .animal.lion {
+      width: 94px;
+      height: 94px;
+      font-size: 58px;
+    }
+
+    .grass {
+      position: absolute;
+      width: 100%;
+      bottom: 4px;
+      left: 0;
+      font-size: 25px;
+      letter-spacing: 2px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--green), #91aa64);
+      color: white;
+      font-weight: 900;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 18px rgba(82, 107, 52, 0.22);
+    }
+
+    h1 {
+      font-family: "Baloo 2", Arial, sans-serif;
+      color: var(--green-dark);
+      font-size: clamp(30px, 8.5vw, 42px);
+      line-height: 1.04;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      max-width: 360px;
+      margin: 0 auto 16px;
+      color: var(--brown-soft);
+      font-size: 16px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .countdown-box {
+      background: rgba(255, 255, 255, 0.70);
+      border: 1px solid rgba(211, 179, 95, 0.50);
+      border-radius: 22px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .countdown-box > p {
+      color: var(--brown-soft);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .countdown div {
+      background: linear-gradient(180deg, var(--cream), #f4e3b9);
+      border-radius: 16px;
+      padding: 9px 4px;
+      border: 1px solid rgba(211, 179, 95, 0.45);
+    }
+
+    .countdown strong {
+      display: block;
+      color: var(--green-dark);
+      font-family: "Baloo 2", Arial, sans-serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .countdown span {
+      color: var(--brown-soft);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .info {
+      background: rgba(245, 234, 212, 0.80);
+      border: 1px solid rgba(211, 179, 95, 0.45);
+      border-radius: 24px;
+      padding: 14px;
+      text-align: left;
+      display: grid;
+      gap: 11px;
+      margin-bottom: 16px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .info-item > span {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      background: var(--cream);
+      border-radius: 14px;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .info-item p {
+      color: var(--brown);
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .info-item strong {
+      display: block;
+      color: var(--green-dark);
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    .maps {
+      display: flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 999px;
+      color: var(--brown);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      box-shadow: 0 10px 20px rgba(137, 105, 42, 0.20);
+      margin-bottom: 16px;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+      text-align: left;
+    }
+
+    form label {
+      text-align: center;
+      color: var(--green-dark);
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    input {
+      width: 100%;
+      min-height: 52px;
+      border: 2px solid rgba(211, 179, 95, 0.72);
+      border-radius: 18px;
+      padding: 0 16px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--brown);
+      background: white;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(111, 142, 69, 0.14);
+    }
+
+    button {
+      min-height: 54px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: white;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 12px 22px rgba(82, 107, 52, 0.24);
+    }
+
+    button:disabled {
+      opacity: 0.7;
+    }
+
+    #mensagem {
+      min-height: 24px;
+      margin-top: 14px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .sucesso {
+      color: var(--green-dark);
+    }
+
+    .erro {
+      color: #b24b3b;
+    }
+
+    footer {
+      margin-top: 16px;
+      color: var(--brown-soft);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .confete {
+      position: fixed;
+      top: -12px;
+      z-index: 9999;
+      width: 10px;
+      height: 16px;
+      border-radius: 3px;
+      pointer-events: none;
+      animation: cair linear forwards;
+    }
+
+    @keyframes flutuar {
+      0%, 100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+
+      50% {
+        transform: translateY(-7px) rotate(1deg);
+      }
+    }
+
+    @keyframes cair {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        max-width: 530px;
+        padding: 28px 28px 30px;
+      }
+
+      .hero {
+        min-height: 205px;
+      }
+
+      .animal.small {
+        width: 82px;
+        height: 82px;
+        font-size: 48px;
+      }
+
+      .animal.lion {
+        width: 106px;
+        height: 106px;
+        font-size: 66px;
+      }
+
+      .info-item p {
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -21,11 +440,13 @@
     <section class="card">
       <div class="hero">
         <div class="sun"></div>
+
         <div class="animals">
           <span class="animal small">🦒</span>
           <span class="animal lion">🦁</span>
           <span class="animal small">🐘</span>
         </div>
+
         <div class="grass">🌿 🌾 🌿 🌾 🌿</div>
       </div>
 
@@ -39,6 +460,7 @@
 
       <section class="countdown-box">
         <p>Faltam</p>
+
         <div class="countdown">
           <div><strong id="dias">00</strong><span>dias</span></div>
           <div><strong id="horas">00</strong><span>horas</span></div>
@@ -90,6 +512,106 @@
     </section>
   </main>
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    const form = document.getElementById("formConfirmacao");
+    const mensagem = document.getElementById("mensagem");
+    const dataFesta = new Date("2026-08-18T18:00:00-03:00");
+
+    function doisDigitos(valor) {
+      return String(valor).padStart(2, "0");
+    }
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diferenca = dataFesta - agora;
+
+      if (diferenca <= 0) {
+        document.getElementById("dias").textContent = "00";
+        document.getElementById("horas").textContent = "00";
+        document.getElementById("minutos").textContent = "00";
+        document.getElementById("segundos").textContent = "00";
+        return;
+      }
+
+      const totalSegundos = Math.floor(diferenca / 1000);
+      const dias = Math.floor(totalSegundos / 86400);
+      const horas = Math.floor((totalSegundos % 86400) / 3600);
+      const minutos = Math.floor((totalSegundos % 3600) / 60);
+      const segundos = totalSegundos % 60;
+
+      document.getElementById("dias").textContent = doisDigitos(dias);
+      document.getElementById("horas").textContent = doisDigitos(horas);
+      document.getElementById("minutos").textContent = doisDigitos(minutos);
+      document.getElementById("segundos").textContent = doisDigitos(segundos);
+    }
+
+    function soltarConfete() {
+      const cores = ["#6f8e45", "#d3b35f", "#f2d989", "#8b6a45", "#ffffff"];
+
+      for (let i = 0; i < 70; i++) {
+        const confete = document.createElement("span");
+
+        confete.className = "confete";
+        confete.style.left = Math.random() * 100 + "vw";
+        confete.style.background = cores[Math.floor(Math.random() * cores.length)];
+        confete.style.animationDuration = 2.2 + Math.random() * 2.2 + "s";
+        confete.style.animationDelay = Math.random() * 0.2 + "s";
+
+        document.body.appendChild(confete);
+
+        setTimeout(() => {
+          confete.remove();
+        }, 5000);
+      }
+    }
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const botao = form.querySelector("button");
+
+      mensagem.textContent = "";
+      mensagem.className = "";
+
+      if (!nome) {
+        mensagem.textContent = "Por favor, informe o nome do convidado.";
+        mensagem.className = "erro";
+        return;
+      }
+
+      botao.disabled = true;
+      botao.textContent = "Confirmando...";
+
+      try {
+        const resposta = await fetch("/confirmar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ nome })
+        });
+
+        const dados = await resposta.json();
+
+        mensagem.textContent = dados.mensagem;
+        mensagem.className = dados.sucesso ? "sucesso" : "erro";
+
+        if (dados.sucesso) {
+          form.reset();
+          soltarConfete();
+        }
+      } catch (error) {
+        mensagem.textContent = "Não foi possível confirmar agora. Tente novamente.";
+        mensagem.className = "erro";
+      } finally {
+        botao.disabled = false;
+        botao.textContent = "Confirmar presença";
+      }
+    });
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+  </script>
 </body>
 </html>
