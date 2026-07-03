@@ -6,7 +6,8 @@ import os
 app = Flask(
     __name__,
     template_folder="templates",
-    static_folder="public"
+    static_folder="public",
+    static_url_path="/public"
 )
 
 ARQUIVO_CONVIDADOS = "convidados.json"
